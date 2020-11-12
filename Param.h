@@ -83,7 +83,7 @@ public:
 	double arrayWireWidth;	// Array wire width (nm)
 	int processNode;	// Technology node (nm)
 	double clkFreq;		// Clock frequency (Hz)
-
+	int lnum;
 	int NumcellPerSynapse;
 	bool NCellmode;
 	bool PulseOperate; // modifing # of pulses / 1 cell
