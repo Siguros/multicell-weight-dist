@@ -74,6 +74,8 @@ extern DFF dffHO;
 extern Subtractor subtractorHO;
 
 extern int correct;		// # of correct prediction
+extern double deltaweightportion[20];
+extern int deltaweightnum[20];
 
 /* Validation */
 void Validate() {
@@ -393,5 +395,16 @@ void Validate() {
 		subArrayIH->readLatency += sumReadLatencyIH;
 		subArrayHO->readLatency += sumReadLatencyHO;
 	}
+	double avgdeltaweight=0;
+	int totalweightnum=0;
+	for(int i=0; i<20; i++){
+	std::cout<<deltaweightportion[i]/deltaweightnum[i] <<std::endl;
+	avgdeltaweight+=deltaweightportion[i];
+	totalweightnum+=deltaweightnum[i];
+	}
+	std::cout<<"avgdeltaweight:"<<avgdeltaweight/totalweightnum <<std::endl;
+	
+	
+	
 }
 
