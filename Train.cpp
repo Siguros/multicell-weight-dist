@@ -93,7 +93,7 @@ extern double totalAvgPotenIH=0;
 extern double totalAvgDepIH=0;
 extern double totalAvgPotenHO=0;
 extern double totalAvgDepHO=0;
-extern double detlaweightportion[20] = {0};
+extern double deltaweightportion[20] = {0};
 extern int deltaweightnum[20] = {0};
 /*Optimization functions*/
 double gradt;
@@ -570,15 +570,20 @@ double s2[param->nOutput];  // Output delta from hidden layer to the output laye
 												}
 												double deltaweightexp = arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight);
 												arrayIH->WriteCell(jj, k, deltaWeight1[jj][k], weight1[jj][k], param->maxWeight, param->minWeight, true, i);
-												double num1= 0.1;
-												double deltaweightexp1 = arrayIH->WriteCell(jj, k, deltaWeight1[jj][k], weight1[jj][k], param->maxWeight, param->minWeight, true, i);
-												for (int i=0; i<20; i++){
-												if(arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight) >=(-1+i*num1)&&
-												   arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight < (-1+(i+1)*num1)){
-												   if(deltaWeight1[jj][k]!=0){
-													   deltaweightportion[i] += (deltaweightepx1 - deltaweightexp) /deltaWeight1[jj][k];
-												   	deltaweightnum[i]+=1;
+											
+												double deltaweightexp1 = arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight);
+
+				double num1=0.1;
+												for (int l=0; l<20; l++){
+												if(arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight) >=(-1+l*num1)&&
+												   arrayIH->ConductanceToWeight(jj, k, param->maxWeight, param->minWeight) < (-1+(l+1)*num1)){
+												   if(deltaWeight1[jj][k]>0.01){ 
+													   if((deltaweightexp1-deltaweightexp) != 0){
+													   deltaweightportion[l] += (deltaweightexp1 - deltaweightexp) /deltaWeight1[jj][k];
+													   //std::cout<<deltaweightportion[l]<<std::endl;
+												   	   deltaweightnum[l]+=1;
 												   }
+												   }	   
 												   }
 												}
 											
